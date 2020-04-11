@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:async';
 // import 'package:permission/permission.dart';
+import 'package:dio/dio.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:path_provider/path_provider.dart';
@@ -49,6 +50,22 @@ Future<File> _downloadFile(String dir) async {
       });
   });
   }
+
+  Future<File> _downloaddio(String dir) async{
+    StorageReference ref= FirebaseStorage.instance.ref().child("questions/tcs_questions.pdf");
+    String url =await ref.getDownloadURL(); 
+    print(url);
+    String filename="tcs/tcs_questions.pdf"; 
+  Dio dio=new Dio();
+  Response response=await dio.download(url, dir+"/"+filename,
+  options: Options(headers: {HttpHeaders.acceptEncodingHeader: "*"}),  // disable gzip
+  onReceiveProgress: (received, total) {
+  if (total != -1) {
+   print((received / total * 100).toStringAsFixed(0) + "%");
+  }
+});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -91,7 +108,7 @@ Future<File> _downloadFile(String dir) async {
         onPressed: () {
           print('Floating!');
           _createDirectory();
-          _downloadFile(_directory.path);
+          _downloaddio(_directory.path);
         },
       ),
       )
