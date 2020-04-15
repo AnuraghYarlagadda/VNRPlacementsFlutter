@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vnrplacements/openInBrowser.dart';
 import './Home.dart';
 
 
@@ -10,8 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return (MaterialApp(
       title: "vnrplacements",
-      home: Home(),
+      home: OpenInBrowser(),
       debugShowCheckedModeBanner: false,
     ));
   }
 }
+
