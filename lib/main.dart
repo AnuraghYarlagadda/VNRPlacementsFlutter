@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vnrplacements/HomeDownload.dart';
+import 'package:vnrplacements/HomeOpenFile.dart';
 import 'package:vnrplacements/openInBrowser.dart';
-import './Home.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -16,4 +16,3 @@ class MyApp extends StatelessWidget {
     ));
   }
 }
-

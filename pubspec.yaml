@@ -34,6 +34,7 @@ dependencies:
   toast: ^0.1.5
   flutter_offline: "^0.3.0"
   url_launcher: ^5.4.2
+  open_file: ^3.0.1
 
 
   # The following adds the Cupertino Icons font to your application.

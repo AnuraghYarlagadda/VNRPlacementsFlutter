@@ -7,14 +7,14 @@ import 'package:vnrplacements/StoragePermissions.dart';
 import './download.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 
-class Home extends StatefulWidget {
+class HomeDownload extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeDownloadState createState() => _HomeDownloadState();
 }
 
 enum Status { start, running, completed }
 
-class _HomeState extends State<Home> {
+class _HomeDownloadState extends State<HomeDownload> {
   String _dir, _url, _filename;
   int _status;
   @override
