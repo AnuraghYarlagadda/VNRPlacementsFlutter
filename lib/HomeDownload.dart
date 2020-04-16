@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:vnrplacements/Storagedirectory.dart';
 import 'getDownloadURLFromFirebase.dart';
-import 'package:vnrplacements/StoragePermissions.dart';
 import './download.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 
@@ -20,8 +18,6 @@ class _HomeDownloadState extends State<HomeDownload> {
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.signInAnonymously();
-    grantStoragePermissionAndCreateDir(this.context);
     this._status = Status.start.index;
   }
 
@@ -117,7 +113,10 @@ class _HomeDownloadState extends State<HomeDownload> {
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text('Offline',style: TextStyle(color:Colors.white),),
+                                Text(
+                                  'Offline',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 SizedBox(width: 8.0),
                                 SizedBox(
                                   width: 12.0,

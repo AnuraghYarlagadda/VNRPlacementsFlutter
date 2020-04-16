@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vnrplacements/StoragePermissions.dart';
 import 'openFileFromLocalStorage.dart';
 
 class HomeOpenFile extends StatefulWidget {
@@ -11,13 +10,12 @@ class _HomeOpenFileState extends State<HomeOpenFile> {
   @override
   void initState() {
     super.initState();
-    grantStoragePermissionAndCreateDir(context);
   }
 
   @override
   Widget build(BuildContext context){
     final filePath =
-        "/storage/emulated/0" + "/Placements" + "/AlumniDetail.xlsx";
+        "/storage/emulated/0" + "/Placements" + "/AlumniDetails.xlsx";
     return Scaffold(
       appBar: new AppBar(
         title: Text("OpenFile"),
