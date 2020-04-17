@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vnrplacements/HomeDownload.dart';
 import 'package:vnrplacements/HomeOpenFile.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
 import 'package:vnrplacements/openInBrowser.dart';
+import 'FirebaseSignInAnonymous.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,9 +14,10 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.signInAnonymously();
+    firebaseSignIn();
     grantStoragePermissionAndCreateDir(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return (Scaffold(

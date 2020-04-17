@@ -1,14 +1,19 @@
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:toast/toast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
+import 'package:vnrplacements/Settings.dart';
 
 Directory applicationStorageDirectory;
 
 Future<Directory> createandgetDirectory(context) async {
-  if(await Permission.storage.isPermanentlyDenied)
-  {
-    Toast.show("Enable Storage Permission in Settings!", context,
-            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+  if (await Permission.storage.isPermanentlyDenied) {
+    Fluttertoast.showToast(
+        msg: "Enable Storage Permission in Settings!",
+        toastLength: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.red,
+        textColor: Colors.white);
+    openAppSettingsVNR();
   }
   if (await (Directory("/storage/emulated/0" + "/Placements").exists())) {
     print("Directory Exists!");

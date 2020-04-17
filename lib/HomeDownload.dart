@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:vnrplacements/FirebaseSignInAnonymous.dart';
+import 'package:vnrplacements/Settings.dart';
+import 'package:vnrplacements/StoragePermissions.dart';
 import 'package:vnrplacements/Storagedirectory.dart';
 import 'getDownloadURLFromFirebase.dart';
 import './download.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:connectivity/connectivity.dart';
 
 class HomeDownload extends StatefulWidget {
   @override
@@ -18,6 +22,8 @@ class _HomeDownloadState extends State<HomeDownload> {
   @override
   void initState() {
     super.initState();
+    firebaseSignIn();
+    grantStoragePermissionAndCreateDir(context);
     this._status = Status.start.index;
   }
 
@@ -42,17 +48,33 @@ class _HomeDownloadState extends State<HomeDownload> {
       return (RaisedButton(
         shape:
             RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25)),
-        onPressed: () {
-          setState(() {
-            this._status = Status.running.index;
-          });
-          intiatedownload().then((onValue) {
-            downloaddio(this._dir, this._url, this._filename).then((onValue) {
+        onPressed: () async {
+          await (Connectivity().checkConnectivity()).then((onValue) {
+            if (onValue == ConnectivityResult.none) {
+              Fluttertoast.showToast(
+                  msg: "No Active Internet Connection!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white);
+              openWIFISettingsVNR();
+            } else {
               setState(() {
-                this._status = Status.completed.index;
+                this._status = Status.running.index;
               });
-              Toast.show("Download Complete!", context);
-            });
+              intiatedownload().then((onValue) {
+                downloaddio(this._dir, this._url, this._filename)
+                    .then((onValue) {
+                  setState(() {
+                    this._status = Status.completed.index;
+                  });
+                  Fluttertoast.showToast(
+                      msg: "Download Completed!",
+                      toastLength: Toast.LENGTH_SHORT,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white);
+                });
+              });
+            }
           });
         },
         color: Colors.blue,
@@ -65,7 +87,11 @@ class _HomeDownloadState extends State<HomeDownload> {
     } else {
       return (MaterialButton(
         onPressed: () {
-          Toast.show("Already Downloaded", context);
+          Fluttertoast.showToast(
+              msg: "Already Downloaded!",
+              toastLength: Toast.LENGTH_SHORT,
+              backgroundColor: Colors.blue,
+              textColor: Colors.white);
         },
         color: Colors.green,
         textColor: Colors.white,
@@ -83,7 +109,7 @@ class _HomeDownloadState extends State<HomeDownload> {
   Widget build(BuildContext context) {
     return (new Scaffold(
         appBar: AppBar(
-          title: Text('Home'),
+          title: Text('Download'),
         ),
         body: OfflineBuilder(
           connectivityBuilder: (

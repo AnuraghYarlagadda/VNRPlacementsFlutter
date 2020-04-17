@@ -3,6 +3,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
 import 'getDownloadURLFromFirebase.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:connectivity/connectivity.dart';
+import './Settings.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'FirebaseSignInAnonymous.dart';
 
 class OpenInBrowser extends StatefulWidget {
   @override
@@ -11,7 +15,14 @@ class OpenInBrowser extends StatefulWidget {
 
 class _OpenInBrowserState extends State<OpenInBrowser> {
   Future<void> _launched;
-  String toLaunch = "http://docs.google.com/gview?url=";
+  String _toLaunch;
+
+  void initState() {
+    super.initState();
+    firebaseSignIn();
+    this._toLaunch = "http://docs.google.com/gview?url=";
+  }
+
   Future<void> _launchInBrowser(String url) async {
     if (await canLaunch(url)) {
       await launch(
@@ -23,6 +34,15 @@ class _OpenInBrowserState extends State<OpenInBrowser> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  intiateLaunchUrl() async {
+    await firebaseurl("questions/tcs_questions.pdf").then((onValue) {
+      setState(() {
+        this._toLaunch += Uri.encodeFull(onValue) + "&embedded=true";
+        _launched = _launchInBrowser(this._toLaunch);
+      });
+    });
   }
 
   Widget _launchStatus(BuildContext context, AsyncSnapshot<void> snapshot) {
@@ -96,15 +116,21 @@ class _OpenInBrowserState extends State<OpenInBrowser> {
               color: Colors.cyan,
               padding: EdgeInsets.all(8),
               onPressed: () async {
-                await firebaseurl("questions/tcs_questions.pdf")
-                    .then((onValue) {
-                  toLaunch += Uri.encodeFull(onValue) + "&embedded=true";
-                  setState(() {
-                    _launched = _launchInBrowser(toLaunch);
-                  });
+                await (Connectivity().checkConnectivity()).then((onValue) {
+                  if (onValue == ConnectivityResult.none) {
+                    Fluttertoast.showToast(
+                        msg: "No Active Internet Connection!",
+                        toastLength: Toast.LENGTH_SHORT,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white);
+                    openWIFISettingsVNR();
+                  } else {
+                    intiateLaunchUrl();
+                  }
                 });
               },
-              child: const Text('Launch in browser',style:TextStyle(color:Colors.white)),
+              child: const Text('Launch in browser',
+                  style: TextStyle(color: Colors.white)),
             ),
             FutureBuilder<void>(future: _launched, builder: _launchStatus),
           ],
