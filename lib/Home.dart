@@ -4,6 +4,7 @@ import 'package:vnrplacements/HomeOpenFile.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
 import 'package:vnrplacements/openInBrowser.dart';
 import 'FirebaseSignInAnonymous.dart';
+import 'Firebase/selectFilter.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -61,6 +62,20 @@ class _HomeState extends State<Home> {
               MaterialPageRoute(
                 builder: (BuildContext context) {
                   return HomeOpenFile();
+                },
+              ),
+            );
+          },
+        ),
+        Padding(padding: EdgeInsets.all(10)),
+        RaisedButton(
+          color: Colors.blue,
+          child: Text("Firebase", style: TextStyle(color: Colors.white)),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return Filter();
                 },
               ),
             );

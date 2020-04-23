@@ -15,6 +15,8 @@ Future<Directory> createandgetDirectory(context) async {
         textColor: Colors.white);
     openAppSettingsVNR();
   }
+  else
+  {
   if (await (Directory("/storage/emulated/0" + "/Placements").exists())) {
     print("Directory Exists!");
     applicationStorageDirectory =
@@ -26,6 +28,7 @@ Future<Directory> createandgetDirectory(context) async {
       applicationStorageDirectory = directory;
       print("created directory" + applicationStorageDirectory.path);
     });
+  }
   }
   return applicationStorageDirectory;
 }
