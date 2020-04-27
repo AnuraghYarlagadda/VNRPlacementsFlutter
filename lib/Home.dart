@@ -1,7 +1,8 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:vnrplacements/HomeDownload.dart';
 import 'package:vnrplacements/HomeOpenFile.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
+import 'package:vnrplacements/getDownloadURLFromFirebase.dart';
 import 'package:vnrplacements/openInBrowser.dart';
 import 'FirebaseSignInAnonymous.dart';
 import 'Firebase/selectFilter.dart';
@@ -12,6 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  StorageReference ref = FirebaseStorage.instance.ref();
   @override
   void initState() {
     super.initState();
@@ -29,14 +31,10 @@ class _HomeState extends State<Home> {
         RaisedButton(
           color: Colors.blue,
           child: Text("Download", style: TextStyle(color: Colors.white)),
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (BuildContext context) {
-                  return HomeDownload();
-                },
-              ),
-            );
+          onPressed: () async {
+              firebaseurl("questions/aarvee_questions.pdf").then((onValue){
+                print(onValue);
+              });
           },
         ),
         Padding(padding: EdgeInsets.all(10)),

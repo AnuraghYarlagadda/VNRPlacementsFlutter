@@ -31,7 +31,8 @@ dependencies:
   app_settings: ^3.0.1
   store_redirect: ^1.0.2
   flutter_plugin_pdf_viewer: ^1.0.7
-
+  carousel_slider: ^2.0.0
+  
   cupertino_icons: ^0.1.2
 
 dev_dependencies:

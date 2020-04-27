@@ -18,9 +18,11 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
   final fb = FirebaseDatabase.instance;
   List<dynamic> companies = [];
   int _status;
+  String filtertype;
   @override
   void initState() {
     super.initState();
+    this.filtertype=widget.filtertype;
     this._status = Status.loading.index;
     _fetchData();
   }
@@ -29,12 +31,12 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
     final ref = fb.reference();
     ref
         .child("Filter")
-        .child(widget.filtertype)
+        .child(this.filtertype)
         .once()
         .then((DataSnapshot data) {
       setState(() {
-        companies = data.value.values.toList();
-        companies.sort();
+        this.companies = data.value.values.toList();
+        this.companies.sort();
         this._status = Status.loaded.index;
       });
     });
@@ -103,7 +105,9 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
   Widget companiesList() {
     return (Center(
       child: this._status == Status.loading.index
-          ? LinearProgressIndicator()
+          ? LinearProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
+            )
           : ListView.builder(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               itemCount: this.companies.length,
@@ -123,9 +127,10 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
                     //padding: EdgeInsets.all(20),
                     child: Card(
                       child: ListTile(
-                        trailing: Icon(Icons.arrow_forward_ios,color: Colors.blue),
+                        trailing:
+                            Icon(Icons.arrow_forward_ios, color: Colors.blue),
                         title: Text(
-                          this.companies[index].toString().toUpperCase(),
+                          this.companies[index].toString().trim().toUpperCase(),
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 15,
