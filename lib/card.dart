@@ -7,7 +7,6 @@ import 'package:vnrplacements/Storagedirectory.dart';
 import 'package:vnrplacements/download.dart';
 import 'package:vnrplacements/getDownloadURLFromFirebase.dart';
 import 'package:vnrplacements/openFileFromLocalStorage.dart';
-import 'package:vnrplacements/pdfViewer.dart';
 
 class card extends StatefulWidget {
   final String fileName, companyName;
@@ -533,19 +532,6 @@ class cardState extends State<card> {
       setState(() {
         _launched = _launchInBrowser(url);
       });
-    });
-  }
-
-  pushtoPdfViewer(String whatToLaunch) async {
-    await firebaseurl(whatToLaunch).then((onValue) {
-      print(onValue);
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (BuildContext context) {
-            return PdfViewer(onValue);
-          },
-        ),
-      );
     });
   }
 }
