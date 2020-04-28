@@ -22,18 +22,14 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
   @override
   void initState() {
     super.initState();
-    this.filtertype=widget.filtertype;
+    this.filtertype = widget.filtertype;
     this._status = Status.loading.index;
     _fetchData();
   }
 
   _fetchData() {
     final ref = fb.reference();
-    ref
-        .child("Filter")
-        .child(this.filtertype)
-        .once()
-        .then((DataSnapshot data) {
+    ref.child("Filter").child(this.filtertype).once().then((DataSnapshot data) {
       setState(() {
         this.companies = data.value.values.toList();
         this.companies.sort();

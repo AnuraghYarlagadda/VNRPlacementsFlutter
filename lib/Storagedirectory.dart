@@ -14,21 +14,20 @@ Future<Directory> createandgetDirectory(context) async {
         backgroundColor: Colors.red,
         textColor: Colors.white);
     openAppSettingsVNR();
-  }
-  else
-  {
-  if (await (Directory("/storage/emulated/0" + "/Placements").exists())) {
-    print("Directory Exists!");
-    applicationStorageDirectory =
-        Directory("/storage/emulated/0" + "/Placements");
   } else {
-    new Directory("/storage/emulated/0" + "/Placements").create(recursive: true)
-        // The created directory is returned as a Future.
-        .then((Directory directory) {
-      applicationStorageDirectory = directory;
-      print("created directory" + applicationStorageDirectory.path);
-    });
-  }
+    if (await (Directory("/storage/emulated/0" + "/Placements").exists())) {
+      print("Directory Exists!");
+      applicationStorageDirectory =
+          Directory("/storage/emulated/0" + "/Placements");
+    } else {
+      new Directory("/storage/emulated/0" + "/Placements")
+          .create(recursive: true)
+          // The created directory is returned as a Future.
+          .then((Directory directory) {
+        applicationStorageDirectory = directory;
+        print("created directory" + applicationStorageDirectory.path);
+      });
+    }
   }
   return applicationStorageDirectory;
 }

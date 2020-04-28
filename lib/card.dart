@@ -2,7 +2,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vnrplacements/FirebaseSignInAnonymous.dart';
 import 'package:vnrplacements/Settings.dart';
 import 'package:vnrplacements/Storagedirectory.dart';
 import 'package:vnrplacements/download.dart';
@@ -13,7 +12,7 @@ import 'package:vnrplacements/pdfViewer.dart';
 class card extends StatefulWidget {
   final String fileName, companyName;
   final Color color;
-  const card(this.fileName, this.companyName,this.color);
+  const card(this.fileName, this.companyName, this.color);
   @override
   cardState createState() => cardState();
 }
@@ -39,7 +38,7 @@ class cardState extends State<card> {
   @override
   void initState() {
     super.initState();
-    firebaseSignIn();
+    //firebaseSignIn();
     // grantStoragePermissionAndCreateDir(context);
     this.statusOfAlumniDetails = Status.start.index;
     this.statusOfListOfCompanies = Status.start.index;
@@ -47,10 +46,7 @@ class cardState extends State<card> {
     this.filenameOfAlumniDetails = "AlumniDetails.xlsx";
     this.filenameOfListOfCompanies = "listofcompanies.xlsx";
     this.filenameOfSampleResume = "sampleresume.pdf";
-    this.cardBorderColor=widget.color;
-    //this._toLaunch = "http://docs.google.com/gview?embedded=true&url=";
-    //this._toLaunch="http://docs.google.com/viewer?url=";
-    //this._toLaunch="https://docs.google.com/a/nasoline/viewer?url=";
+    this.cardBorderColor = widget.color;
 
     //For Interview Details and Questions
     this.statusOfInterviewDetails = Status.start.index;
@@ -521,7 +517,6 @@ class cardState extends State<card> {
                 initiateLaunchUrl(
                     "questions" + "/" + widget.companyName + "_questions.pdf");
               }
-              //pushtoPdfViewer();
             }
           });
         },

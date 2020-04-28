@@ -17,7 +17,7 @@ Future<void> openFile(
   if (result.type == ResultType.noAppToOpen) {
     Fluttertoast.showToast(
         msg: "No APP found to open this File!",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         backgroundColor: Colors.red,
         textColor: Colors.white);
     if (fileFormat == "xlsx")
