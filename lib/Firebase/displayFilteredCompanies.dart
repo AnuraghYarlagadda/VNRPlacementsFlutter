@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:vnrplacements/Firebase/displayCompanyDetails.dart';
 
 class DisplayFilteredCompanies extends StatefulWidget {
@@ -101,9 +102,7 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
   Widget companiesList() {
     return (Center(
       child: this._status == Status.loading.index
-          ? LinearProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
-            )
+          ? SpinKitWave(color: Colors.pink, type: SpinKitWaveType.start)
           : ListView.builder(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               itemCount: this.companies.length,

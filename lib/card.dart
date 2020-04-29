@@ -108,7 +108,7 @@ class cardState extends State<card> {
     return (Card(
       color: Colors.white,
       borderOnForeground: true,
-      elevation: 25,
+      elevation: 15,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(25), topRight: Radius.circular(50)),
@@ -194,7 +194,9 @@ class cardState extends State<card> {
           child: Text('Download'),
         ));
       } else if (this.statusOfAlumniDetails == Status.running.index) {
-        return CircularProgressIndicator();
+        return CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
+        );
       } else {
         return (MaterialButton(
           onPressed: () {
@@ -255,7 +257,9 @@ class cardState extends State<card> {
           child: Text('Download'),
         ));
       } else if (this.statusOfListOfCompanies == Status.running.index) {
-        return CircularProgressIndicator();
+        return CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
+        );
       } else {
         return (MaterialButton(
           onPressed: () {
@@ -317,7 +321,9 @@ class cardState extends State<card> {
           child: Text('Download'),
         ));
       } else if (this.statusOfSampleResume == Status.running.index) {
-        return CircularProgressIndicator();
+        return CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
+        );
       } else {
         return (MaterialButton(
           onPressed: () {
@@ -378,7 +384,9 @@ class cardState extends State<card> {
           child: Text('Download'),
         ));
       } else if (this.statusOfInterviewDetails == Status.running.index) {
-        return CircularProgressIndicator();
+        return CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
+        );
       } else {
         return (MaterialButton(
           onPressed: () {
@@ -439,7 +447,9 @@ class cardState extends State<card> {
           child: Text('Download'),
         ));
       } else if (this.statusOfInterviewQuestions == Status.running.index) {
-        return CircularProgressIndicator();
+        return CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
+        );
       } else {
         return (MaterialButton(
           onPressed: () {

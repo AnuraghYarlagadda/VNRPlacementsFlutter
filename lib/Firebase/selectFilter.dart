@@ -1,4 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:marquee/marquee.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
@@ -6,6 +7,7 @@ import 'package:vnrplacements/Firebase/displayFilteredCompanies.dart';
 import 'package:vnrplacements/FirebaseSignInAnonymous.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
 import 'package:vnrplacements/card.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
 class Filter extends StatefulWidget {
   @override
@@ -21,18 +23,21 @@ class FilterState extends State<Filter> {
     "Software and Service",
     "Software and Product"
   ];
+  double width, height;
   @override
   void initState() {
     super.initState();
     firebaseSignIn();
     grantStoragePermissionAndCreateDir(context);
-    this.cards.add(new card("Alumni Details", "",Colors.pink));
-    this.cards.add(new card("List Of Companies", "",Colors.cyan));
-    this.cards.add(new card("Requirements and Sample Resume", "",Colors.teal));
+    this.cards.add(new card("Alumni Details", "", Colors.pink));
+    this.cards.add(new card("List Of Companies", "", Colors.cyan));
+    this.cards.add(new card("Requirements and Sample Resume", "", Colors.teal));
   }
 
   @override
   Widget build(BuildContext context) {
+    this.height = MediaQuery.of(context).size.height;
+    this.width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -91,36 +96,61 @@ class FilterState extends State<Filter> {
           child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
-                ),
-                spinner(),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
-                ),
-                CarouselSlider(
-                  options: CarouselOptions(
-                    enlargeCenterPage: true,
-                  ),
-                  items: this
-                      .cards
-                      .map((item) => Container(
-                            child: Center(child: (item)),
-                            color: Colors.white,
-                            padding: EdgeInsets.all(10),
-                          ))
-                      .toList(),
-                )
+                SizedBox(height: this.height / 10),
+                spinner(this.height / 15),
+                SizedBox(height: this.height / 10),
+                cards.length == 0
+                    ? CircularProgressIndicator()
+                    : SizedBox(
+                        height: this.height / 3,
+                        child: Swiper(
+                          itemBuilder: (BuildContext context, int index) {
+                            return (SizedBox(child: cards[index]));
+                          },
+                          itemCount: cards.length,
+                          itemWidth: this.width - 60,
+                          itemHeight: this.height / 5,
+                          layout: SwiperLayout.STACK,
+                          indicatorLayout: PageIndicatorLayout.COLOR,
+                          pagination: new SwiperPagination(
+                              builder: new DotSwiperPaginationBuilder(
+                                  color: Colors.grey,
+                                  activeColor: Colors.pinkAccent)),
+                          control: new SwiperControl(),
+                          scrollDirection: Axis.horizontal,
+                        )),
+                SizedBox(
+                    height: this.height / 3,
+                    child: Marquee(
+                      text:
+                          'Files Downloaded can be viewed at : INTERNAL STORAGE/PLACEMENTS',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.pink,
+                          decoration: TextDecoration.underline),
+                      scrollAxis: Axis.horizontal,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      blankSpace: 20.0,
+                      velocity: 75.0,
+                      pauseAfterRound: Duration(milliseconds: 850),
+                      startPadding: 10.0,
+                      accelerationDuration: Duration(seconds: 1),
+                      accelerationCurve: Curves.linearToEaseOut,
+                      decelerationDuration: Duration(milliseconds: 1000),
+                      decelerationCurve: Curves.decelerate,
+                    ))
               ]))),
     );
   }
 
-  Widget spinner() {
+  Widget spinner(height) {
     return (Center(
         child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Column(children: <Widget>[
               Container(
+                  height: height,
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vnrplacements/Firebase/selectFilter.dart';
+import 'Firebase/selectFilter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

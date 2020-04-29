@@ -3,11 +3,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:marquee/marquee.dart';
 import 'package:vnrplacements/DataModels/CompanyDetails.dart';
 import 'package:vnrplacements/FirebaseSignInAnonymous.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
 import 'package:vnrplacements/card.dart';
 import 'package:vnrplacements/getDownloadURLFromFirebase.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
 class DisplayCompanyDetails extends StatefulWidget {
   final String companyName;
@@ -25,6 +29,7 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
   //String urlOfDetails, urlOfQuestions;
   List cards;
   String companyName;
+  double width, height;
   @override
   void initState() {
     super.initState();
@@ -98,6 +103,8 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
 
   @override
   Widget build(BuildContext context) {
+    this.height = MediaQuery.of(context).size.height;
+    this.width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
             title: Text(widget.companyName.toString().trim().toUpperCase())),
@@ -154,10 +161,8 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
           child: Container(
               child: companyDetails == null
                   ? Center(
-                      child: CircularProgressIndicator(
-                      valueColor:
-                          new AlwaysStoppedAnimation<Color>(Colors.pink),
-                    ))
+                      child: SpinKitDualRing(color: Colors.pink),
+                    )
                   : SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(
@@ -272,19 +277,52 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
                           this.cards.length == 0
                               ? Text("")
                               : (this.cards.length != 1
-                                  ? (CarouselSlider(
-                                      options: CarouselOptions(
-                                        enlargeCenterPage: true,
-                                      ),
-                                      items: cards
-                                          .map((item) => Container(
-                                                child: Center(child: (item)),
-                                                color: Colors.white,
-                                                padding: EdgeInsets.all(10),
-                                              ))
-                                          .toList(),
-                                    ))
-                                  : this.cards[0])
+                                  ? SizedBox(
+                                      height: this.height / 3,
+                                      child: Swiper(
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return (SizedBox(
+                                              child: cards[index]));
+                                        },
+                                        itemCount: cards.length,
+                                        itemWidth: this.width - 60,
+                                        itemHeight: this.height / 5,
+                                        layout: SwiperLayout.STACK,
+                                        indicatorLayout:
+                                            PageIndicatorLayout.COLOR,
+                                        pagination: new SwiperPagination(
+                                            builder:
+                                                new DotSwiperPaginationBuilder(
+                                                    color: Colors.grey,
+                                                    activeColor:
+                                                        Colors.pinkAccent)),
+                                        control: new SwiperControl(),
+                                        scrollDirection: Axis.horizontal,
+                                      ))
+                                  : this.cards[0]),
+                          SizedBox(
+                              height: this.height / 10,
+                              child: Marquee(
+                                text:
+                                    'Files Downloaded can be viewed at : INTERNAL STORAGE/PLACEMENTS',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.pink,
+                                    decoration: TextDecoration.underline),
+                                scrollAxis: Axis.horizontal,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                blankSpace: 20.0,
+                                velocity: 75.0,
+                                pauseAfterRound: Duration(milliseconds: 850),
+                                startPadding: 10.0,
+                                accelerationDuration: Duration(seconds: 1),
+                                accelerationCurve: Curves.linearToEaseOut,
+                                decelerationDuration:
+                                    Duration(milliseconds: 1000),
+                                decelerationCurve: Curves.decelerate,
+                              ))
                         ],
                       ))),
         ));
