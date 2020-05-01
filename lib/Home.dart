@@ -24,33 +24,6 @@ class _HomeState extends State<Home> {
                 child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                GradientButton(
-                  child: Text('Gradient'),
-                  callback: () {
-                    print("hi");
-                  },
-                  gradient: Gradients.blush,
-                  shadowColor:
-                      Gradients.backToFuture.colors.last.withOpacity(0),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                CircularGradientButton(
-                  child: Icon(Icons.gradient),
-                  callback: () {},
-                  gradient: Gradients.rainbowBlue,
-                  shadowColor: Gradients.rainbowBlue.colors.last.withOpacity(0),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
                 GradientText(
                   'Hello',
                   shaderRect: Rect.fromLTWH(0.0, 0.0, 50.0, 50.0),
@@ -58,29 +31,6 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     fontSize: 40.0,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                cardx("Interview Details", "", Gradients.ali),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                cardx("Interview Questions", "", Gradients.blush),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                cardx("Interview Questions", "", Gradients.byDesign),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                cardx("Interview Questions", "", Gradients.taitanum),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                ),
-                cardx("Interview Questions", "", Gradients.tameer),
-                Padding(
-                  padding: EdgeInsets.all(10),
                 ),
               ]),
             ))));
