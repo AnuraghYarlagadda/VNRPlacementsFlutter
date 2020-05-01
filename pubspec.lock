@@ -226,6 +226,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  gradient_progress:
+    dependency: "direct main"
+    description:
+      name: gradient_progress
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
+  gradient_widgets:
+    dependency: "direct main"
+    description:
+      name: gradient_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.2"
   http:
     dependency: "direct main"
     description:

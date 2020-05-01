@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:vnrplacements/Firebase/displayCompanyDetails.dart';
 
 class DisplayFilteredCompanies extends StatefulWidget {
@@ -42,10 +43,10 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.filtertype),
-        ),
-        body: OfflineBuilder(
+        appBar: AppBar(title: Text(widget.filtertype)),
+        body:Container(
+          //decoration: new BoxDecoration(gradient: Gradients.coldLinear),
+          child: OfflineBuilder(
           connectivityBuilder: (
             BuildContext context,
             ConnectivityResult connectivity,
@@ -62,12 +63,12 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
                   right: 0.0,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 350),
-                    color: connected ? Colors.green : Colors.red,
+                    color: connected ? Colors.transparent : Colors.red,
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 350),
                       child: connected
                           ? Text(
-                              'Online',
+                              '',
                               style: TextStyle(color: Colors.white),
                             )
                           : Row(
@@ -96,6 +97,7 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
             );
           },
           child: companiesList(),
+          )
         ));
   }
 

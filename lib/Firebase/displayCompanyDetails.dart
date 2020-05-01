@@ -1,15 +1,15 @@
 import 'dart:collection';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:marquee/marquee.dart';
 import 'package:vnrplacements/DataModels/CompanyDetails.dart';
 import 'package:vnrplacements/FirebaseSignInAnonymous.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
-import 'package:vnrplacements/card.dart';
+import 'package:vnrplacements/cardx.dart';
 import 'package:vnrplacements/getDownloadURLFromFirebase.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
@@ -78,13 +78,14 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
   }
 
   fetchurls() async {
-    this.cards = new List<card>();
+    this.cards = new List<cardx>();
     await firebaseurl("questions" + "/" + this.companyName + "_questions.pdf")
         .then((onValue) {
       setState(() {
         if (onValue != null) {
           this.cards.add(
-                card("Interview Questions", this.companyName, Colors.purple),
+                cardx(
+                    "Interview Questions", this.companyName, Gradients.tameer),
               );
         }
       });
@@ -94,7 +95,8 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
       setState(() {
         if (onValue != null) {
           this.cards.add(
-                card("Interview Details", this.companyName, Colors.deepOrange),
+                cardx(
+                    "Interview Details", this.companyName, Gradients.taitanum),
               );
         }
       });
@@ -125,12 +127,12 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
                   right: 0.0,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 350),
-                    color: connected ? Colors.green : Colors.red,
+                    color: connected ? Colors.transparent : Colors.red,
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 350),
                       child: connected
                           ? Text(
-                              'Online',
+                              '',
                               style: TextStyle(color: Colors.white),
                             )
                           : Row(
@@ -301,28 +303,6 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
                                         scrollDirection: Axis.horizontal,
                                       ))
                                   : this.cards[0]),
-                          SizedBox(
-                              height: this.height / 10,
-                              child: Marquee(
-                                text:
-                                    'Files Downloaded can be viewed at : INTERNAL STORAGE/PLACEMENTS',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Colors.pink,
-                                    decoration: TextDecoration.underline),
-                                scrollAxis: Axis.horizontal,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                blankSpace: 20.0,
-                                velocity: 75.0,
-                                pauseAfterRound: Duration(milliseconds: 850),
-                                startPadding: 10.0,
-                                accelerationDuration: Duration(seconds: 1),
-                                accelerationCurve: Curves.linearToEaseOut,
-                                decelerationDuration:
-                                    Duration(milliseconds: 1000),
-                                decelerationCurve: Curves.decelerate,
-                              ))
                         ],
                       ))),
         ));
