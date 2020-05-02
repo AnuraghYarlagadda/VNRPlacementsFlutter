@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'cardx.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 class Home extends StatefulWidget {
@@ -36,14 +35,3 @@ class _HomeState extends State<Home> {
             ))));
   }
 }
-
-// bottomNavigationBar: Container(
-//           padding: EdgeInsets.only(left: 4.0, right: 4.0),
-//           height: 44.0 + MediaQuery.of(context).padding.bottom,
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: <Widget>[
-//               IconButton(icon: Icon(Icons.star)),
-//               IconButton(icon: Icon(Icons.star)),
-//             ],
-//           ),
