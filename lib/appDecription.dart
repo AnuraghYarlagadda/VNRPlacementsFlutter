@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vnrplacements/Firebase/selectFilter.dart';
+import 'package:vnrplacements/Home.dart';
 
 class AppDescription extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class AppDescriptionState extends State<AppDescription> {
               onPressed: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return Filter();
+                  return Home();
                 }));
               },
               color: Colors.green,

@@ -21,15 +21,17 @@ class AppTourState extends State<AppTour> {
   void initState() {
     super.initState();
   }
-@override
-dispose() {
-  super.dispose();
-}
+
+  @override
+  dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-          title: Text("AppTour"),
+          title: Text("App Tour"),
         ),
         body: OfflineBuilder(
             connectivityBuilder: (
@@ -73,7 +75,7 @@ dispose() {
                                           " S K I P ",
                                         ],
                                         textStyle: TextStyle(
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
                                         textAlign: TextAlign.start,
@@ -81,7 +83,7 @@ dispose() {
                                       ),
                                       Icon(
                                         Icons.skip_next,
-                                        size: 35,
+                                        size: 30,
                                       )
                                     ]))))
                       ],
@@ -107,7 +109,7 @@ dispose() {
                       pagination: new SwiperPagination(
                           builder: new FractionPaginationBuilder(
                         color: Colors.black,
-                        activeColor: Colors.red,
+                        activeColor: Colors.indigo,
                       )),
                       control: new SwiperControl(
                           iconPrevious: Icons.arrow_back,

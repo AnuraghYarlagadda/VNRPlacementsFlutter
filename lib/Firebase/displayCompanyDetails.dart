@@ -289,7 +289,7 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
                                         },
                                         itemCount: cards.length,
                                         itemWidth: this.width - 60,
-                                        itemHeight: this.height / 5,
+                                        itemHeight: 130,
                                         layout: SwiperLayout.STACK,
                                         indicatorLayout:
                                             PageIndicatorLayout.COLOR,
@@ -297,6 +297,8 @@ class DisplayCompanyDetailsState extends State<DisplayCompanyDetails> {
                                             builder:
                                                 new DotSwiperPaginationBuilder(
                                                     color: Colors.grey,
+                                                    size: 8,
+                                                    activeSize: 11,
                                                     activeColor:
                                                         Colors.pinkAccent)),
                                         control: new SwiperControl(),

@@ -41,20 +41,6 @@ class FilterState extends State<Filter> {
     this.height = MediaQuery.of(context).size.height;
     this.width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        leading: Icon(Icons.home),
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        padding: EdgeInsets.only(left: 4.0, right: 4.0),
-        height: MediaQuery.of(context).size.height / 10 +
-            MediaQuery.of(context).padding.bottom,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[],
-        ),
-      ),
       body: Container(
           decoration: new BoxDecoration(gradient: Gradients.coldLinear),
           child: OfflineBuilder(
@@ -112,7 +98,7 @@ class FilterState extends State<Filter> {
                   scrollDirection: Axis.vertical,
                   child: Column(children: <Widget>[
                     SizedBox(height: this.height / 10),
-                    spinner(this.height / 15),
+                    spinner(),
                     SizedBox(height: this.height / 10),
                     cards.length == 0
                         ? CircularProgressIndicator()
@@ -124,12 +110,14 @@ class FilterState extends State<Filter> {
                               },
                               itemCount: cards.length,
                               itemWidth: this.width - 60,
-                              itemHeight: this.height / 5,
+                              itemHeight: 135,
                               layout: SwiperLayout.STACK,
                               indicatorLayout: PageIndicatorLayout.COLOR,
                               pagination: new SwiperPagination(
                                   builder: new DotSwiperPaginationBuilder(
                                       color: Colors.white,
+                                      activeSize: 11,
+                                      size: 8,
                                       activeColor: Colors.blue[900])),
                               control: new SwiperControl(color: Colors.white),
                               scrollDirection: Axis.horizontal,
@@ -138,7 +126,7 @@ class FilterState extends State<Filter> {
     );
   }
 
-  Widget spinner(height) {
+  Widget spinner() {
     return (Center(
         child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,

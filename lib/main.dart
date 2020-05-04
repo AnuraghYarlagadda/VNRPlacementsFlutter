@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vnrplacements/firstPage.dart';
+import 'package:vnrplacements/appTour.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return (MaterialApp(
       title: "vnrplacements",
-      home: FirstPage(),
+      home: AppTour(),
       debugShowCheckedModeBanner: false,
     ));
   }
