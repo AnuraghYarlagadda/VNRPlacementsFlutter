@@ -23,7 +23,7 @@ class cardxState extends State<cardx> {
   Color cardBorderColor;
   String _dir;
   Future<void> _launched;
-  //String _toLaunch;
+ 
 
   //Variables for Interview Details and Questions
   int statusOfInterviewDetails, statusOfInterviewQuestions;
@@ -33,9 +33,7 @@ class cardxState extends State<cardx> {
   @override
   void initState() {
     super.initState();
-    //firebaseSignIn();
-    // grantStoragePermissionAndCreateDir(context);
-
+    
     //For Interview Details and Questions
     this.statusOfInterviewDetails = Status.start.index;
     this.statusOfInterviewQuestions = Status.start.index;

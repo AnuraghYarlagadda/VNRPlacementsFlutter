@@ -27,7 +27,6 @@ class cardState extends State<card> {
       filenameOfListOfCompanies,
       filenameOfSampleResume;
   Future<void> _launched;
-  //String _toLaunch;
 
   //Variables for Interview Details and Questions
   int statusOfInterviewDetails, statusOfInterviewQuestions;
@@ -37,8 +36,6 @@ class cardState extends State<card> {
   @override
   void initState() {
     super.initState();
-    //firebaseSignIn();
-    // grantStoragePermissionAndCreateDir(context);
     this.statusOfAlumniDetails = Status.start.index;
     this.statusOfListOfCompanies = Status.start.index;
     this.statusOfSampleResume = Status.start.index;

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:vnrplacements/Firebase/displayFilteredCompanies.dart';
 import 'package:vnrplacements/FirebaseSignInAnonymous.dart';
-import 'package:vnrplacements/StoragePermissions.dart';
 import 'package:vnrplacements/card.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 
@@ -28,7 +27,6 @@ class FilterState extends State<Filter> {
   void initState() {
     super.initState();
     firebaseSignIn();
-    grantStoragePermissionAndCreateDir(context);
     this.cards.add(new card("Alumni Details", "", Colors.purple));
     this.cards.add(new card("List Of Companies", "", Colors.orange[900]));
     this

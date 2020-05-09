@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vnrplacements/Home.dart';
+import 'package:vnrplacements/StoragePermissions.dart';
 
 class AppDescription extends StatefulWidget {
   @override
@@ -7,6 +8,11 @@ class AppDescription extends StatefulWidget {
 }
 
 class AppDescriptionState extends State<AppDescription> {
+  @override
+  void initState() {
+    super.initState();
+    grantStoragePermissionAndCreateDir(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission." />
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="VNR\nPlacements"
+        android:label="VNR Placements"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

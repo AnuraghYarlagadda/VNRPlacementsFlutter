@@ -2,7 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:vnrplacements/Firebase/displayCompanyDetails.dart';
 
 class DisplayFilteredCompanies extends StatefulWidget {

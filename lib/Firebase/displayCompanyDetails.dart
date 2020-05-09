@@ -5,7 +5,6 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
-import 'package:marquee/marquee.dart';
 import 'package:vnrplacements/DataModels/CompanyDetails.dart';
 import 'package:vnrplacements/FirebaseSignInAnonymous.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
