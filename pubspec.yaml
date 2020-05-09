@@ -32,7 +32,9 @@ dependencies:
 
   gradient_widgets: ^0.5.2
   animated_text_kit: ^2.0.1
-  
+  flutter_launcher_icons: ^0.7.5
+  flutter_native_splash: ^0.1.9
+
 
   cupertino_icons: ^0.1.2
 
@@ -43,3 +45,11 @@ flutter:
   uses-material-design: true
   assets:
     - images/
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/jobrsa.png"
+flutter_native_splash:
+  image: images/jobnobg.png
+  color: "#FF00BCD4"
+  ios: false

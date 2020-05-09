@@ -15,10 +15,10 @@ class Filter extends StatefulWidget {
 }
 
 class FilterState extends State<Filter> {
-  String filter = 'Click on Dropdown to select a category';
+  String filter = '   Tap here  to select a category';
   List cards = new List<card>();
   List<String> spinnerItems = [
-    "Click on Dropdown to select a category",
+    "   Tap here  to select a category",
     "Core",
     "Software and Service",
     "Software and Product"
@@ -128,72 +128,70 @@ class FilterState extends State<Filter> {
 
   Widget spinner() {
     return (Center(
-        child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Column(children: <Widget>[
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                      color: Colors.white,
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
-                              topRight: Radius.circular(15),
-                              topLeft: Radius.circular(15)),
-                          side: BorderSide(width: 2, color: Colors.blue)),
-                      child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                        value: filter,
+        child: Container(
+            width: MediaQuery.of(context).size.width - 15,
+            child: Center(
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Card(
+                        color: Colors.white,
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                                topLeft: Radius.circular(15)),
+                            side: BorderSide(width: 2, color: Colors.blue)),
+                        child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                          value: filter,
 
-                        icon: Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black,
-                        ),
-                        iconSize: 35,
-                        //isDense: true,
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.black,
-                        ),
-                        onChanged: (String data) {
-                          setState(() {
-                            this.filter = data;
-                            if (this.filter !=
-                                "Click on Dropdown to select a category") {
-                              Navigator.of(context)
-                                  .push(MaterialPageRoute(builder: (context) {
-                                return DisplayFilteredCompanies(filter);
-                              }));
-                            }
-                          });
-                        },
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black,
+                          ),
+                          iconSize: 35,
+                          //isDense: true,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.black,
+                          ),
+                          onChanged: (String data) {
+                            setState(() {
+                              this.filter = data;
+                              if (this.filter != this.spinnerItems[0]) {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  return DisplayFilteredCompanies(filter);
+                                }));
+                              }
+                            });
+                          },
 
-                        items: this
-                            .spinnerItems
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                              value: value,
-                              child: (value == this.spinnerItems[0]
-                                  ? Text(
-                                      value,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontStyle: FontStyle.normal,
-                                      ),
-                                    )
-                                  : Text(
-                                      value,
-                                      style: TextStyle(
-                                        color: Colors.pink,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.italic,
-                                      ),
-                                    )));
-                        }).toList(),
-                      ))))
-            ]))));
+                          items: this
+                              .spinnerItems
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                                value: value,
+                                child: (value == this.spinnerItems[0]
+                                    ? Text(
+                                        value,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontStyle: FontStyle.normal,
+                                        ),
+                                      )
+                                    : Text(
+                                        value,
+                                        style: TextStyle(
+                                          color: Colors.pink,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                      )));
+                          }).toList(),
+                        ))))))));
   }
 }

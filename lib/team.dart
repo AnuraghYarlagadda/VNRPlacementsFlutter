@@ -1,4 +1,3 @@
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -10,28 +9,28 @@ class Team extends StatefulWidget {
 class TeamState extends State<Team> {
   static List<int> indices = [0, 1, 2, 3, 4, 5];
   static List<String> images = [
-    "images/anuragh.JPG",
-    "images/anuragh.JPG",
-    "images/anuragh.JPG",
-    "images/anuragh.JPG",
-    "images/anuragh.JPG",
-    "images/anuragh.JPG",
+    "images/bvkmaam.jpeg",
+    "images/rk.jpg",
+    "images/bharath.jpg",
+    "images/yamini.jpg",
+    "images/harini.jpg",
+    "images/anu.JPG",
   ];
   static List<String> names = [
-    "BVK Mam",
-    "RK Sir",
-    "Bharath Sir",
-    "Yamini",
-    "Harini",
-    "Anuragh"
+    "Dr.B.V.Kiranmayee",
+    "P.Ramakrishna Chowdary",
+    "P.Bharath Kumar Chowdary",
+    "B.V Yamini",
+    "G Harini",
+    "Anuragh Yarlagadda"
   ];
   static List<String> designation = [
-    "HOD",
+    "HOD- Dept. of CSE",
     "Placement Cordinator",
     "Placement Cordinator",
-    "Student",
-    "Student",
-    "Student"
+    "III year CSE",
+    "II year CSE",
+    "III year CSE"
   ];
   final List<Widget> imageSliders = indices
       .map((item) => Column(
@@ -42,12 +41,15 @@ class TeamState extends State<Team> {
                 Text(
                   names[item],
                   style: TextStyle(
-                    fontSize: 25,
-                      color:Colors.indigo,fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+                      fontSize: 25,
+                      color: Colors.indigo,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic),
                 ),
                 Text(designation[item],
-                style: TextStyle(
-                      fontWeight: FontWeight.w600,))
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ))
               ]))
       .toList();
   @override
