@@ -31,11 +31,14 @@ class AppDescriptionState extends State<AppDescription> {
             ),
             SizedBox(
                 height: MediaQuery.of(context).size.height / 2,
-                child: Marquee(
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                    child: Marquee(
                   text:
-                      'Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering and Technology (VNRVJIET) is an engineering college in Hyderabad, India recognized by All India Council for Technical Education(AICTE) and affiliated to the Jawaharlal Nehru Technological University, Hyderabad. It is often referred to as VNR College or Vignana Jyothi Engineering College or VNRVJIET.According to 2019 NIRF Rankings, VNR VJIET ranked 109 in Engineering Category. By which it states that its the top 2nd private college in Telangana State.',
+                      'VNR Placements is the one stop destination to know about everything related to placements in the college.\nThis app is to keep you informed right from interview details to sample interview questions that are specific for each company. \nAlso you can view the list of companies that have been hiring the students since past few years and focus on companies that interest you. \nGet started and be updated!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontSize: 17
                     // color: Colors.pink,
                   ),
                   scrollAxis: Axis.vertical,
@@ -48,7 +51,7 @@ class AppDescriptionState extends State<AppDescription> {
                   accelerationCurve: Curves.linearToEaseOut,
                   decelerationDuration: Duration(milliseconds: 1000),
                   decelerationCurve: Curves.decelerate,
-                )),
+                ))),
             RaisedButton(
               elevation: 25,
               onPressed: () {
