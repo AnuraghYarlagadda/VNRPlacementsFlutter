@@ -18,8 +18,8 @@ class TeamState extends State<Team> {
   ];
   static List<String> names = [
     "Dr.B.V.Kiranmayee",
-    "P.Ramakrishna Chowdary",
-    "P.Bharath Kumar Chowdary",
+    "P.Ramakrishna",
+    "P.Bharath Kumar",
     "B.V Yamini",
     "G Harini",
     "Anuragh Yarlagadda"
