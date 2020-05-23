@@ -79,28 +79,10 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.search),
-          centerTitle: true,
-          title: TextField(
-            //autofocus: true,
-            controller: editingController,
-            style: new TextStyle(
-              color: Colors.white,
-            ),
-            onChanged: (value) {
-              filterSearchResults(value.toLowerCase());
-            },
-            cursorColor: Colors.white,
-            cursorWidth: 2.5,
-            showCursor: true,
-            decoration: new InputDecoration(
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                hintText: "Search ..",
-                hintStyle: new TextStyle(color: Colors.white)),
+          title: Text(
+            this.filtertype,
+            style: TextStyle(
+                fontSize: 21, color: Colors.white, fontWeight: FontWeight.w800),
           ),
         ),
         body: Container(
@@ -170,18 +152,52 @@ class DisplayFilteredCompaniesState extends State<DisplayFilteredCompanies> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                    child: Text(
-                      this.filtertype,
-                      style: TextStyle(
-                          fontSize: 21,
-                          color: Colors.deepOrange,
-                          fontWeight: FontWeight.w800),
-                    ),
-                  ),
+                      padding: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                      child: Card(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  topLeft: Radius.circular(5)),
+                              side:
+                                  BorderSide(width: 1, color: Colors.blueGrey)),
+                          child: ListTile(
+                            trailing: IconButton(
+                                icon: Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  editingController.clear();
+                                  filterSearchResults("");
+                                }),
+                            title: TextField(
+                              controller: editingController,
+                              style: new TextStyle(
+                                color: Colors.black,
+                              ),
+                              onChanged: (value) {
+                                filterSearchResults(value.toLowerCase().trim());
+                              },
+                              cursorColor: Colors.blue,
+                              cursorWidth: 2.5,
+                              showCursor: true,
+                              decoration: new InputDecoration(
+                                prefixIcon: Icon(Icons.search),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                hintText: "Search ..",
+                              ),
+                            ),
+                          ))),
                   Expanded(
                       child: items.length == 0
-                          ? Text("☹️ No such Company found..!")
+                          ? Text(" ☹️ No such Company found..!")
                           : Scrollbar(
                               child: ListView.builder(
                                   shrinkWrap: true,
