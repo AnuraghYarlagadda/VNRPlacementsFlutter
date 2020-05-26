@@ -89,10 +89,7 @@ class AppTourState extends State<AppTour> {
                                 width: MediaQuery.of(context).size.width,
                                 child: RaisedButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(builder: (context) {
-                                        return AppDescription();
-                                      }));
+                                      Navigator.of(context).pushReplacementNamed("appDescription");
                                     },
                                     color: Colors.yellow[700],
                                     shape: RoundedRectangleBorder(
