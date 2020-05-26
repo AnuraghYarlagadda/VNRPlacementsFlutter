@@ -23,7 +23,6 @@ class cardxState extends State<cardx> {
   Color cardBorderColor;
   String _dir;
   Future<void> _launched;
- 
 
   //Variables for Interview Details and Questions
   int statusOfInterviewDetails, statusOfInterviewQuestions;
@@ -33,7 +32,7 @@ class cardxState extends State<cardx> {
   @override
   void initState() {
     super.initState();
-    
+
     //For Interview Details and Questions
     this.statusOfInterviewDetails = Status.start.index;
     this.statusOfInterviewQuestions = Status.start.index;
@@ -100,7 +99,8 @@ class cardxState extends State<cardx> {
           ButtonBar(
             children: <Widget>[
               whatToLoadwhileDownloading(widget.fileName),
-              openFileOrLaunchFile(widget.fileName),
+              launchFile(widget.fileName),
+              openFiles(widget.fileName)
             ],
           ),
         ],
@@ -125,9 +125,9 @@ class cardxState extends State<cardx> {
   Widget whatToLoadwhileDownloading(String whatToDownload) {
     if (whatToDownload == "Interview Details") {
       if (this.statusOfInterviewDetails == Status.start.index) {
-        return (RaisedButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(25)),
+        return (IconButton(
+          icon: Icon(Icons.file_download),
+          iconSize: 30,
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -159,9 +159,7 @@ class cardxState extends State<cardx> {
             });
           },
           color: Colors.white,
-          textColor: Colors.blue,
           padding: EdgeInsets.all(8),
-          child: Text('Download'),
         ));
       } else if (this.statusOfInterviewDetails == Status.running.index) {
         return CircularProgressIndicator(
@@ -188,9 +186,9 @@ class cardxState extends State<cardx> {
       }
     } else if (whatToDownload == "Interview Questions") {
       if (this.statusOfInterviewQuestions == Status.start.index) {
-        return (RaisedButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(25)),
+        return (IconButton(
+          icon: Icon(Icons.file_download),
+          iconSize: 30,
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -222,9 +220,7 @@ class cardxState extends State<cardx> {
             });
           },
           color: Colors.white,
-          textColor: Colors.blue,
           padding: EdgeInsets.all(8),
-          child: Text('Download'),
         ));
       } else if (this.statusOfInterviewQuestions == Status.running.index) {
         return CircularProgressIndicator(
@@ -252,11 +248,49 @@ class cardxState extends State<cardx> {
     }
   }
 
-  Widget openFileOrLaunchFile(String whatToOpenOrLaunch) {
-    return (RaisedButton(
+  Widget openFiles(String toOpen) {
+    if (toOpen == "Interview Details") {
+      final filePath = "/storage/emulated/0" +
+          "/Placements" +
+          "/" +
+          this.filenameOfInterviewDetails;
+      final fileFormat = "pdf";
+      return (Center(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(25)),
+            color: Colors.white,
+            textColor: Colors.pink,
+            child: Text("Open File"),
+            onPressed: () async {
+              await openFile(context, filePath, fileFormat);
+            }),
+      ));
+    } else if (toOpen == "Interview Questions") {
+      final filePath = "/storage/emulated/0" +
+          "/Placements" +
+          "/" +
+          this.filenameOfInterviewQuestions;
+      final fileFormat = "pdf";
+      return (Center(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(25)),
+            color: Colors.white,
+            textColor: Colors.pink,
+            child: Text("Open File"),
+            onPressed: () async {
+              await openFile(context, filePath, fileFormat);
+            }),
+      ));
+    }
+  }
+
+  Widget launchFile(String toLaunch) {
+    return (IconButton(
+      icon: Icon(Icons.open_in_browser),
       color: Colors.white,
-      shape:
-          RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25)),
+      iconSize: 30,
       padding: EdgeInsets.all(8),
       onPressed: () async {
         await (Connectivity().checkConnectivity()).then((onValue) {
@@ -268,20 +302,16 @@ class cardxState extends State<cardx> {
                 textColor: Colors.white);
             openWIFISettingsVNR();
           } else {
-            if (whatToOpenOrLaunch == "Requirements and Sample Resume") {
-              initiateLaunchUrl("sampleresume.pdf");
-            } else if (whatToOpenOrLaunch == "Interview Details") {
+            if (toLaunch == "Interview Details") {
               initiateLaunchUrl(
                   "details" + "/" + widget.companyName + "_details.pdf");
-            } else if (whatToOpenOrLaunch == "Interview Questions") {
+            } else if (toLaunch == "Interview Questions") {
               initiateLaunchUrl(
                   "questions" + "/" + widget.companyName + "_questions.pdf");
             }
           }
         });
       },
-      child: const Text('Launch in browser',
-          style: TextStyle(color: Colors.blue)),
     ));
   }
 

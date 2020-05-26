@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vnrplacements/Home.dart';
 import 'package:vnrplacements/StoragePermissions.dart';

@@ -3,7 +3,6 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:vnrplacements/appDecription.dart';
 
 class AppTour extends StatefulWidget {
   @override

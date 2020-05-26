@@ -28,11 +28,6 @@ class cardState extends State<card> {
       filenameOfSampleResume;
   Future<void> _launched;
 
-  //Variables for Interview Details and Questions
-  int statusOfInterviewDetails, statusOfInterviewQuestions;
-  String urlOfInterviewDetails, urlOfInterviewQuestions;
-  String filenameOfInterviewDetails, filenameOfInterviewQuestions;
-
   @override
   void initState() {
     super.initState();
@@ -43,14 +38,6 @@ class cardState extends State<card> {
     this.filenameOfListOfCompanies = "listofcompanies.xlsx";
     this.filenameOfSampleResume = "sampleresume.pdf";
     this.cardBorderColor = widget.color;
-
-    //For Interview Details and Questions
-    this.statusOfInterviewDetails = Status.start.index;
-    this.statusOfInterviewQuestions = Status.start.index;
-    this.filenameOfInterviewDetails =
-        widget.companyName + "/" + widget.companyName + "_details.pdf";
-    this.filenameOfInterviewQuestions =
-        widget.companyName + "/" + widget.companyName + "_questions.pdf";
   }
 
   Future<void> intiatedownload(String whatToDownload) async {
@@ -78,23 +65,6 @@ class cardState extends State<card> {
         setState(() {
           //print(onValue);
           this.urlOfSampleResume = onValue;
-        });
-      });
-    } else if (whatToDownload == "Interview Details") {
-      await firebaseurl("details" + "/" + widget.companyName + "_details.pdf")
-          .then((onValue) {
-        setState(() {
-          print(onValue);
-          this.urlOfInterviewDetails = onValue;
-        });
-      });
-    } else if (whatToDownload == "Interview Questions") {
-      await firebaseurl(
-              "questions" + "/" + widget.companyName + "_questions.pdf")
-          .then((onValue) {
-        setState(() {
-          print(onValue);
-          this.urlOfInterviewQuestions = onValue;
         });
       });
     }
@@ -127,7 +97,8 @@ class cardState extends State<card> {
           ButtonBar(
             children: <Widget>[
               whatToLoadwhileDownloading(widget.fileName),
-              openFileOrLaunchFile(widget.fileName),
+              launchFile(widget.fileName),
+              openFiles(widget.fileName),
             ],
           ),
         ],
@@ -152,9 +123,11 @@ class cardState extends State<card> {
   Widget whatToLoadwhileDownloading(String whatToDownload) {
     if (whatToDownload == "Alumni Details") {
       if (this.statusOfAlumniDetails == Status.start.index) {
-        return (RaisedButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(25)),
+        return (IconButton(
+          icon: Icon(
+            Icons.file_download,
+            size: 30,
+          ),
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -186,9 +159,7 @@ class cardState extends State<card> {
             });
           },
           color: Colors.blue,
-          textColor: Colors.white,
           padding: EdgeInsets.all(8),
-          child: Text('Download'),
         ));
       } else if (this.statusOfAlumniDetails == Status.running.index) {
         return CircularProgressIndicator(
@@ -215,9 +186,9 @@ class cardState extends State<card> {
       }
     } else if (whatToDownload == "List Of Companies") {
       if (this.statusOfListOfCompanies == Status.start.index) {
-        return (RaisedButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(25)),
+        return (IconButton(
+          icon: Icon(Icons.file_download),
+          iconSize: 30,
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -249,9 +220,7 @@ class cardState extends State<card> {
             });
           },
           color: Colors.blue,
-          textColor: Colors.white,
           padding: EdgeInsets.all(8),
-          child: Text('Download'),
         ));
       } else if (this.statusOfListOfCompanies == Status.running.index) {
         return CircularProgressIndicator(
@@ -278,9 +247,9 @@ class cardState extends State<card> {
       }
     } else if (whatToDownload == "Requirements and Sample Resume") {
       if (this.statusOfSampleResume == Status.start.index) {
-        return (RaisedButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(25)),
+        return (IconButton(
+          icon: Icon(Icons.file_download),
+          iconSize: 30,
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -313,137 +282,9 @@ class cardState extends State<card> {
             });
           },
           color: Colors.blue,
-          textColor: Colors.white,
           padding: EdgeInsets.all(8),
-          child: Text('Download'),
         ));
       } else if (this.statusOfSampleResume == Status.running.index) {
-        return CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
-        );
-      } else {
-        return (MaterialButton(
-          onPressed: () {
-            Fluttertoast.showToast(
-                msg: "Already Downloaded!",
-                toastLength: Toast.LENGTH_SHORT,
-                backgroundColor: Colors.blue,
-                textColor: Colors.white);
-          },
-          color: Colors.green,
-          textColor: Colors.white,
-          child: Icon(
-            Icons.check,
-            size: 24,
-          ),
-          padding: EdgeInsets.all(8),
-          shape: CircleBorder(),
-        ));
-      }
-    } else if (whatToDownload == "Interview Details") {
-      if (this.statusOfInterviewDetails == Status.start.index) {
-        return (RaisedButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(25)),
-          onPressed: () async {
-            await (Connectivity().checkConnectivity()).then((onValue) {
-              if (onValue == ConnectivityResult.none) {
-                Fluttertoast.showToast(
-                    msg: "No Active Internet Connection!",
-                    toastLength: Toast.LENGTH_SHORT,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white);
-                openWIFISettingsVNR();
-              } else {
-                setState(() {
-                  this.statusOfInterviewDetails = Status.running.index;
-                });
-                intiatedownload("Interview Details").then((onValue) {
-                  downloaddio(this._dir, this.urlOfInterviewDetails,
-                          this.filenameOfInterviewDetails)
-                      .then((onValue) {
-                    setState(() {
-                      this.statusOfInterviewDetails = Status.completed.index;
-                    });
-                    Fluttertoast.showToast(
-                        msg: "Download Completed!",
-                        toastLength: Toast.LENGTH_SHORT,
-                        backgroundColor: Colors.green,
-                        textColor: Colors.white);
-                  });
-                });
-              }
-            });
-          },
-          color: Colors.blue,
-          textColor: Colors.white,
-          padding: EdgeInsets.all(8),
-          child: Text('Download'),
-        ));
-      } else if (this.statusOfInterviewDetails == Status.running.index) {
-        return CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
-        );
-      } else {
-        return (MaterialButton(
-          onPressed: () {
-            Fluttertoast.showToast(
-                msg: "Already Downloaded!",
-                toastLength: Toast.LENGTH_SHORT,
-                backgroundColor: Colors.blue,
-                textColor: Colors.white);
-          },
-          color: Colors.green,
-          textColor: Colors.white,
-          child: Icon(
-            Icons.check,
-            size: 24,
-          ),
-          padding: EdgeInsets.all(8),
-          shape: CircleBorder(),
-        ));
-      }
-    } else if (whatToDownload == "Interview Questions") {
-      if (this.statusOfInterviewQuestions == Status.start.index) {
-        return (RaisedButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(25)),
-          onPressed: () async {
-            await (Connectivity().checkConnectivity()).then((onValue) {
-              if (onValue == ConnectivityResult.none) {
-                Fluttertoast.showToast(
-                    msg: "No Active Internet Connection!",
-                    toastLength: Toast.LENGTH_SHORT,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white);
-                openWIFISettingsVNR();
-              } else {
-                setState(() {
-                  this.statusOfInterviewQuestions = Status.running.index;
-                });
-                intiatedownload("Interview Questions").then((onValue) {
-                  downloaddio(this._dir, this.urlOfInterviewQuestions,
-                          this.filenameOfInterviewQuestions)
-                      .then((onValue) {
-                    setState(() {
-                      this.statusOfInterviewQuestions = Status.completed.index;
-                    });
-                    Fluttertoast.showToast(
-                        msg: "Download Completed!",
-                        toastLength: Toast.LENGTH_SHORT,
-                        backgroundColor: Colors.green,
-                        textColor: Colors.white);
-                  });
-                });
-              }
-            });
-          },
-          color: Colors.blue,
-          textColor: Colors.white,
-          padding: EdgeInsets.all(8),
-          child: Text('Download'),
-        ));
-      } else if (this.statusOfInterviewQuestions == Status.running.index) {
         return CircularProgressIndicator(
           valueColor: new AlwaysStoppedAnimation<Color>(Colors.pink),
         );
@@ -469,8 +310,8 @@ class cardState extends State<card> {
     }
   }
 
-  Widget openFileOrLaunchFile(String whatToOpenOrLaunch) {
-    if (whatToOpenOrLaunch == "Alumni Details") {
+  Widget openFiles(String toOpen) {
+    if (toOpen == "Alumni Details") {
       final filePath =
           "/storage/emulated/0" + "/Placements" + "/AlumniDetails.xlsx";
       final fileFormat = "xlsx";
@@ -484,7 +325,7 @@ class cardState extends State<card> {
               await openFile(context, filePath, fileFormat);
             }),
       ));
-    } else if (whatToOpenOrLaunch == "List Of Companies") {
+    } else if (toOpen == "List Of Companies") {
       final filePath =
           "/storage/emulated/0" + "/Placements" + "/listofcompanies.xlsx";
       final fileFormat = "xlsx";
@@ -499,11 +340,37 @@ class cardState extends State<card> {
             }),
       ));
     } else {
-      return (RaisedButton(
-        color: Colors.blue,
-        shape:
-            RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25)),
-        padding: EdgeInsets.all(8),
+      final filePath =
+          "/storage/emulated/0" + "/Placements" + "/sampleresume.pdf";
+      final fileFormat = "pdf";
+      return (Center(
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(25)),
+            color: Colors.blue,
+            child: Text("Open File"),
+            onPressed: () async {
+              await openFile(context, filePath, fileFormat);
+            }),
+      ));
+    }
+  }
+
+  Widget launchFile(String toLaunch) {
+    if (toLaunch == "Alumni Details") {
+      return Padding(
+        padding: EdgeInsets.all(0),
+      );
+    } else if (toLaunch == "List Of Companies") {
+      return Padding(
+        padding: EdgeInsets.all(0),
+      );
+    } else {
+      return (IconButton(
+        color: Colors.deepOrange,
+        padding: EdgeInsets.all(5),
+        icon: Icon(Icons.open_in_browser),
+        iconSize: 30,
         onPressed: () async {
           await (Connectivity().checkConnectivity()).then((onValue) {
             if (onValue == ConnectivityResult.none) {
@@ -514,20 +381,12 @@ class cardState extends State<card> {
                   textColor: Colors.white);
               openWIFISettingsVNR();
             } else {
-              if (whatToOpenOrLaunch == "Requirements and Sample Resume") {
+              if (toLaunch == "Requirements and Sample Resume") {
                 initiateLaunchUrl("sampleresume.pdf");
-              } else if (whatToOpenOrLaunch == "Interview Details") {
-                initiateLaunchUrl(
-                    "details" + "/" + widget.companyName + "_details.pdf");
-              } else if (whatToOpenOrLaunch == "Interview Questions") {
-                initiateLaunchUrl(
-                    "questions" + "/" + widget.companyName + "_questions.pdf");
               }
             }
           });
         },
-        child: const Text('Launch in browser',
-            style: TextStyle(color: Colors.white)),
       ));
     }
   }
