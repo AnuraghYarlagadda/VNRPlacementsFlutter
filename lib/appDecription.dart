@@ -102,6 +102,9 @@ class AppDescriptionState extends State<AppDescription> {
                                 ),
                             textAlign: TextAlign.justify,
                           ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                          ),
                           Text(
                             "This app is to keep you informed right from interview details to sample interview questions that are specific for each company.",
                             style: TextStyle(
@@ -109,6 +112,9 @@ class AppDescriptionState extends State<AppDescription> {
                                 // color: Colors.pink,
                                 ),
                             textAlign: TextAlign.justify,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
                           ),
                           Text(
                             "Also you can view the list of companies that have been hiring the students since past few years and focus on companies that interest you.",
@@ -118,11 +124,14 @@ class AppDescriptionState extends State<AppDescription> {
                                 ),
                             textAlign: TextAlign.justify,
                           ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                          ),
                           Text(
                             "Get started and be updated!",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 17,
+                              fontSize: 19,
                               color: Colors.pink,
                             ),
                             textAlign: TextAlign.justify,

@@ -95,10 +95,12 @@ class cardState extends State<card> {
             ),
           ),
           ButtonBar(
+            //alignment: MainAxisAlignment.center,
+            //mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               whatToLoadwhileDownloading(widget.fileName),
-              launchFile(widget.fileName),
               openFiles(widget.fileName),
+              launchFile(widget.fileName),
             ],
           ),
         ],
@@ -123,11 +125,7 @@ class cardState extends State<card> {
   Widget whatToLoadwhileDownloading(String whatToDownload) {
     if (whatToDownload == "Alumni Details") {
       if (this.statusOfAlumniDetails == Status.start.index) {
-        return (IconButton(
-          icon: Icon(
-            Icons.file_download,
-            size: 30,
-          ),
+        return (RaisedButton(
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -158,6 +156,10 @@ class cardState extends State<card> {
               }
             });
           },
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(25)),
+          child: Text("Download"),
+          textColor: Colors.white,
           color: Colors.blue,
           padding: EdgeInsets.all(8),
         ));
@@ -186,9 +188,7 @@ class cardState extends State<card> {
       }
     } else if (whatToDownload == "List Of Companies") {
       if (this.statusOfListOfCompanies == Status.start.index) {
-        return (IconButton(
-          icon: Icon(Icons.file_download),
-          iconSize: 30,
+        return (RaisedButton(
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -219,6 +219,10 @@ class cardState extends State<card> {
               }
             });
           },
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(25)),
+          child: Text("Download"),
+          textColor: Colors.white,
           color: Colors.blue,
           padding: EdgeInsets.all(8),
         ));
@@ -247,9 +251,7 @@ class cardState extends State<card> {
       }
     } else if (whatToDownload == "Requirements and Sample Resume") {
       if (this.statusOfSampleResume == Status.start.index) {
-        return (IconButton(
-          icon: Icon(Icons.file_download),
-          iconSize: 30,
+        return (RaisedButton(
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -281,6 +283,10 @@ class cardState extends State<card> {
               }
             });
           },
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(25)),
+          child: Text("Download"),
+          textColor: Colors.white,
           color: Colors.blue,
           padding: EdgeInsets.all(8),
         ));
@@ -366,11 +372,13 @@ class cardState extends State<card> {
         padding: EdgeInsets.all(0),
       );
     } else {
-      return (IconButton(
-        color: Colors.deepOrange,
-        padding: EdgeInsets.all(5),
-        icon: Icon(Icons.open_in_browser),
-        iconSize: 30,
+      return (RaisedButton(
+        color: Colors.blue,
+        textColor: Colors.white,
+        padding: EdgeInsets.all(8),
+        shape:
+            RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25)),
+        child: Text("WebView"),
         onPressed: () async {
           await (Connectivity().checkConnectivity()).then((onValue) {
             if (onValue == ConnectivityResult.none) {

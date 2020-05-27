@@ -99,8 +99,8 @@ class cardxState extends State<cardx> {
           ButtonBar(
             children: <Widget>[
               whatToLoadwhileDownloading(widget.fileName),
+              openFiles(widget.fileName),
               launchFile(widget.fileName),
-              openFiles(widget.fileName)
             ],
           ),
         ],
@@ -125,9 +125,7 @@ class cardxState extends State<cardx> {
   Widget whatToLoadwhileDownloading(String whatToDownload) {
     if (whatToDownload == "Interview Details") {
       if (this.statusOfInterviewDetails == Status.start.index) {
-        return (IconButton(
-          icon: Icon(Icons.file_download),
-          iconSize: 30,
+        return (RaisedButton(
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -158,6 +156,10 @@ class cardxState extends State<cardx> {
               }
             });
           },
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(25)),
+          child: Text("Download"),
+          textColor: Colors.black,
           color: Colors.white,
           padding: EdgeInsets.all(8),
         ));
@@ -186,9 +188,7 @@ class cardxState extends State<cardx> {
       }
     } else if (whatToDownload == "Interview Questions") {
       if (this.statusOfInterviewQuestions == Status.start.index) {
-        return (IconButton(
-          icon: Icon(Icons.file_download),
-          iconSize: 30,
+        return (RaisedButton(
           onPressed: () async {
             await (Connectivity().checkConnectivity()).then((onValue) {
               if (onValue == ConnectivityResult.none) {
@@ -219,6 +219,10 @@ class cardxState extends State<cardx> {
               }
             });
           },
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(25)),
+          child: Text("Download"),
+          textColor: Colors.black,
           color: Colors.white,
           padding: EdgeInsets.all(8),
         ));
@@ -259,9 +263,10 @@ class cardxState extends State<cardx> {
         child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(25)),
-            color: Colors.white,
-            textColor: Colors.pink,
             child: Text("Open File"),
+            textColor: Colors.black,
+            color: Colors.white,
+            padding: EdgeInsets.all(8),
             onPressed: () async {
               await openFile(context, filePath, fileFormat);
             }),
@@ -276,9 +281,10 @@ class cardxState extends State<cardx> {
         child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(25)),
-            color: Colors.white,
-            textColor: Colors.pink,
             child: Text("Open File"),
+            textColor: Colors.black,
+            color: Colors.white,
+            padding: EdgeInsets.all(8),
             onPressed: () async {
               await openFile(context, filePath, fileFormat);
             }),
@@ -287,10 +293,12 @@ class cardxState extends State<cardx> {
   }
 
   Widget launchFile(String toLaunch) {
-    return (IconButton(
-      icon: Icon(Icons.open_in_browser),
+    return (RaisedButton(
+      shape:
+          RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25)),
+      child: Text("WebView"),
+      textColor: Colors.black,
       color: Colors.white,
-      iconSize: 30,
       padding: EdgeInsets.all(8),
       onPressed: () async {
         await (Connectivity().checkConnectivity()).then((onValue) {
