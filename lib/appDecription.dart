@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vnrplacements/Home.dart';
 import 'package:vnrplacements/StoragePermissions.dart';
@@ -96,10 +97,12 @@ class AppDescriptionState extends State<AppDescription> {
                         children: <Widget>[
                           Text(
                             "VNR Placements is the one stop destination to know about everything related to placements in the college.",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17
-                                // color: Colors.pink,
-                                ),
+                            style: GoogleFonts.courgette(
+                              textStyle: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                              ),
+                            ),
                             textAlign: TextAlign.justify,
                           ),
                           Padding(
@@ -107,10 +110,10 @@ class AppDescriptionState extends State<AppDescription> {
                           ),
                           Text(
                             "This app is to keep you informed right from interview details to sample interview questions that are specific for each company.",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17
-                                // color: Colors.pink,
-                                ),
+                            style: GoogleFonts.courgette(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 19),
+                            ),
                             textAlign: TextAlign.justify,
                           ),
                           Padding(
@@ -118,10 +121,10 @@ class AppDescriptionState extends State<AppDescription> {
                           ),
                           Text(
                             "Also you can view the list of companies that have been hiring the students since past few years and focus on companies that interest you.",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17
-                                // color: Colors.pink,
-                                ),
+                            style: GoogleFonts.courgette(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.w500, fontSize: 19),
+                            ),
                             textAlign: TextAlign.justify,
                           ),
                           Padding(
@@ -129,10 +132,11 @@ class AppDescriptionState extends State<AppDescription> {
                           ),
                           Text(
                             "Get started and be updated!",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19,
-                              color: Colors.pink,
+                            style: GoogleFonts.pathwayGothicOne(
+                              textStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  color: Colors.indigo),
                             ),
                             textAlign: TextAlign.justify,
                           ),

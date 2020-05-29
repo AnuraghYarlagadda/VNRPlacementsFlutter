@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_offline/flutter_offline.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:vnrplacements/Introslider/intro_slider.dart';
+import 'package:vnrplacements/Introslider/slide_object.dart';
 
 class AppTour extends StatefulWidget {
   @override
@@ -10,20 +9,129 @@ class AppTour extends StatefulWidget {
 }
 
 class AppTourState extends State<AppTour> {
-  List<String> images = [
-    "images/one.jpeg",
-    "images/two.jpeg",
-    "images/three.jpeg",
-    "images/four.jpeg",
-  ];
+  List<Slide> slides = new List();
+
   @override
   void initState() {
     super.initState();
+
+    slides.add(
+      new Slide(
+        title: "PERMISSIONS",
+        styleTitle: GoogleFonts.lato(
+          textStyle: TextStyle(
+              letterSpacing: 2.5,
+              fontSize: 28,
+              color: Colors.white,
+              fontWeight: FontWeight.w800),
+        ),
+        description:
+            "Tap on Allow!\nApplication tries to save files in 'Internal Storage' under folder 'Placements'!",
+        styleDescription: GoogleFonts.patrickHand(
+            textStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 22,
+        )),
+        pathImage: "images/b.jpg",
+        backgroundColor: Colors.teal,
+      ),
+    );
+    slides.add(
+      new Slide(
+        title: "TOUR AGAIN",
+        styleTitle: GoogleFonts.lato(
+          textStyle: TextStyle(
+              letterSpacing: 2.5,
+              fontSize: 28,
+              color: Colors.white,
+              fontWeight: FontWeight.w800),
+        ),
+        description: "Tap on 'INFO' icon highlighted to view 'APP TOUR' again!",
+        styleDescription: GoogleFonts.patrickHand(
+            textStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 22,
+        )),
+        pathImage: "images/a.jpg",
+        widthImage: 125,
+        heightImage: 150,
+        backgroundColor: Colors.teal,
+      ),
+    );
+    slides.add(
+      new Slide(
+        title: "CATEGORY",
+        styleTitle: GoogleFonts.lato(
+          textStyle: TextStyle(
+              letterSpacing: 2.5,
+              fontSize: 28,
+              color: Colors.white,
+              fontWeight: FontWeight.w800),
+        ),
+        description:
+            "Selecting a category from the dropdown displays List of Companies under that!",
+        styleDescription: GoogleFonts.patrickHand(
+            textStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 22,
+        )),
+        pathImage: "images/c.jpg",
+        widthImage: 150,
+        heightImage: 150,
+        backgroundColor: Colors.teal,
+      ),
+    );
+    slides.add(
+      new Slide(
+        title: "COMPANY DETAILS",
+        styleTitle: GoogleFonts.lato(
+          textStyle: TextStyle(
+              letterSpacing: 2.5,
+              fontSize: 28,
+              color: Colors.white,
+              fontWeight: FontWeight.w800),
+        ),
+        description: "Tap on a Company to view details!",
+        styleDescription: GoogleFonts.patrickHand(
+            textStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 22,
+        )),
+        pathImage: "images/d.jpg",
+        backgroundColor: Colors.teal,
+      ),
+    );
+    slides.add(
+      new Slide(
+        title: "FILES",
+        styleTitle: GoogleFonts.lato(
+          textStyle: TextStyle(
+              letterSpacing: 2.5,
+              fontSize: 28,
+              color: Colors.white,
+              fontWeight: FontWeight.w800),
+        ),
+        description:
+            "Download and Open the file or Click on WEBVIEW to view directly in the browser!",
+        styleDescription: GoogleFonts.patrickHand(
+            textStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 22,
+        )),
+        pathImage: "images/e.jpg",
+        widthImage: 125,
+        heightImage: 125,
+        backgroundColor: Colors.teal,
+      ),
+    );
   }
 
-  @override
-  dispose() {
-    super.dispose();
+  void onDonePress() {
+    Navigator.of(context).pushReplacementNamed("appDescription");
+  }
+
+  void onSkipPress() {
+    Navigator.of(context).pushReplacementNamed("appDescription");
   }
 
   Future<bool> _onBackPressed() {
@@ -63,91 +171,10 @@ class AppTourState extends State<AppTour> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: _onBackPressed,
-        child: new Scaffold(
-            appBar: AppBar(
-              title: Text("App Tour"),
-            ),
-            body: OfflineBuilder(
-                connectivityBuilder: (
-                  BuildContext context,
-                  ConnectivityResult connectivity,
-                  Widget child,
-                ) {
-                  return Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      child,
-                      Positioned(
-                        height: MediaQuery.of(context).size.height / 15,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Row(
-                          children: <Widget>[
-                            Padding(padding: EdgeInsets.fromLTRB(0, 100, 0, 0)),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: RaisedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushReplacementNamed("appDescription");
-                                    },
-                                    color: Colors.yellow[700],
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(5),
-                                          bottomRight: Radius.circular(5),
-                                          topRight: Radius.circular(5),
-                                          topLeft: Radius.circular(5)),
-                                    ),
-                                    child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(children: <Widget>[
-                                          TyperAnimatedTextKit(
-                                            text: [
-                                              " S K I P ",
-                                            ],
-                                            textStyle: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.start,
-                                            // speed: Duration(milliseconds: 100),
-                                          ),
-                                          Icon(
-                                            Icons.skip_next,
-                                            size: 30,
-                                          )
-                                        ]))))
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                child: SingleChildScrollView(
-                  child: Column(children: <Widget>[
-                    Padding(padding: EdgeInsets.all(25)),
-                    SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        child: Swiper(
-                          itemBuilder: (BuildContext context, int index) {
-                            return new Image.asset(
-                              images[index],
-                              fit: BoxFit.fill,
-                            );
-                          },
-                          indicatorLayout: PageIndicatorLayout.COLOR,
-                          itemCount: images.length,
-                          pagination: new SwiperPagination(
-                              builder: new FractionPaginationBuilder(
-                            color: Colors.black,
-                            activeColor: Colors.indigo,
-                          )),
-                          control: new SwiperControl(
-                              iconPrevious: Icons.arrow_back,
-                              iconNext: Icons.arrow_forward,
-                              color: Colors.black),
-                        )),
-                  ]),
-                ))));
+        child: new IntroSlider(
+          slides: this.slides,
+          onDonePress: this.onDonePress,
+          onSkipPress: this.onSkipPress,
+        ));
   }
 }
