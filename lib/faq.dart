@@ -10,8 +10,9 @@ class FAQState extends State<FAQ> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
+            child: Padding(
+      padding: EdgeInsets.fromLTRB(5, 5, 5, 35),
       child: Column(
-        //crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Card(
             child: ExpansionTile(
@@ -259,6 +260,6 @@ class FAQState extends State<FAQ> {
           ),
         ],
       ),
-    ));
+    )));
   }
 }

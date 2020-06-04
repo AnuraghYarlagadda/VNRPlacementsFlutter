@@ -1,3 +1,4 @@
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:vnrplacements/Firebase/selectFilter.dart';
 import 'package:vnrplacements/faq.dart';
@@ -14,12 +15,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-  }
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 
   @override
@@ -41,32 +36,19 @@ class _HomeState extends State<Home> {
                   leading: Icon(Icons.group),
                 ),
       body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        backgroundColor: Colors.white,
-        currentIndex: _currentIndex,
-        items: [
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(
-              'Home',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          new BottomNavigationBarItem(
-            icon: Icon(Icons.question_answer),
-            title: Text(
-              'FAQ',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          new BottomNavigationBarItem(
-              icon: Icon(Icons.group),
-              title: Text(
-                'Team',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ))
+      bottomNavigationBar: FancyBottomNavigation(
+        onTabChangedListener: (position) {
+          setState(() {
+            this._currentIndex = position;
+          });
+        },
+        tabs: [
+          TabData(iconData: Icons.home, title: "Home"),
+          TabData(iconData: Icons.question_answer, title: "FAQ"),
+          TabData(iconData: Icons.group, title: "Team")
         ],
+        inactiveIconColor: Colors.blueGrey,
+        textColor: Colors.blueGrey,
       ),
     );
   }
