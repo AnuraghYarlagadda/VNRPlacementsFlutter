@@ -26,7 +26,7 @@ class AppTourState extends State<AppTour> {
               fontWeight: FontWeight.w800),
         ),
         description:
-            "Tap on Allow!\nApplication tries to save files in 'Internal Storage' under folder 'Placements'!",
+            "Tap on Allow!\nAll the downloaded files are saved into 'Internal Storage' under the folder 'Placements'!",
         styleDescription: GoogleFonts.patrickHand(
             textStyle: TextStyle(
           color: Colors.white,
@@ -46,7 +46,8 @@ class AppTourState extends State<AppTour> {
               color: Colors.white,
               fontWeight: FontWeight.w800),
         ),
-        description: "Tap on 'INFO' icon highlighted to view 'APP TOUR' again!",
+        description:
+            "Tap on the highlighted 'INFO' icon to view the 'APP TOUR' again!",
         styleDescription: GoogleFonts.patrickHand(
             textStyle: TextStyle(
           color: Colors.white,
@@ -69,7 +70,7 @@ class AppTourState extends State<AppTour> {
               fontWeight: FontWeight.w800),
         ),
         description:
-            "Selecting a category from the dropdown displays List of Companies under that!",
+            "Selecting a category from the drop-down displays the list of Companies under that!",
         styleDescription: GoogleFonts.patrickHand(
             textStyle: TextStyle(
           color: Colors.white,
@@ -91,7 +92,7 @@ class AppTourState extends State<AppTour> {
               color: Colors.white,
               fontWeight: FontWeight.w800),
         ),
-        description: "Tap on a Company to view details!",
+        description: "Tap on a company to get more information.",
         styleDescription: GoogleFonts.patrickHand(
             textStyle: TextStyle(
           color: Colors.white,
@@ -112,7 +113,7 @@ class AppTourState extends State<AppTour> {
               fontWeight: FontWeight.w800),
         ),
         description:
-            "Download and Open the file or Click on WEBVIEW to view directly in the browser!",
+            "Download and Open the file or Click on WebView to view directly in the browser!",
         styleDescription: GoogleFonts.patrickHand(
             textStyle: TextStyle(
           color: Colors.white,
