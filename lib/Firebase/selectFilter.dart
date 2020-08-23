@@ -32,6 +32,7 @@ class FilterState extends State<Filter> {
     this
         .cards
         .add(new card("Requirements and Sample Resume", "", Colors.indigo));
+    this.cards.add(new card("Video Resumes", "", Colors.teal));
   }
 
   @override

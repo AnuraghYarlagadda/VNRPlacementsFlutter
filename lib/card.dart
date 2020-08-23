@@ -313,6 +313,10 @@ class cardState extends State<card> {
           shape: CircleBorder(),
         ));
       }
+    } else if (whatToDownload == "Video Resumes") {
+      return Padding(
+        padding: EdgeInsets.all(0),
+      );
     }
   }
 
@@ -345,7 +349,7 @@ class cardState extends State<card> {
               await openFile(context, filePath, fileFormat);
             }),
       ));
-    } else {
+    } else if (toOpen == "Requirements and Sample Resume") {
       final filePath =
           "/storage/emulated/0" + "/Placements" + "/sampleresume.pdf";
       final fileFormat = "pdf";
@@ -359,6 +363,10 @@ class cardState extends State<card> {
               await openFile(context, filePath, fileFormat);
             }),
       ));
+    } else if (toOpen == "Video Resumes") {
+      return Padding(
+        padding: EdgeInsets.all(0),
+      );
     }
   }
 
@@ -378,7 +386,9 @@ class cardState extends State<card> {
         padding: EdgeInsets.all(8),
         shape:
             RoundedRectangleBorder(borderRadius: new BorderRadius.circular(25)),
-        child: Text("WebView"),
+        child: toLaunch == "Requirements and Sample Resume"
+            ? Text("WebView")
+            : Text("Open Video Resumes Drive Link"),
         onPressed: () async {
           await (Connectivity().checkConnectivity()).then((onValue) {
             if (onValue == ConnectivityResult.none) {
@@ -391,6 +401,9 @@ class cardState extends State<card> {
             } else {
               if (toLaunch == "Requirements and Sample Resume") {
                 initiateLaunchUrl("sampleresume.pdf");
+              } else if (toLaunch == "Video Resumes") {
+                initiateLaunchUrl(
+                    "https://drive.google.com/drive/folders/1GG2mKUle0eEh-T0VdD2bQDa2W3V4NrpF?usp=sharing");
               }
             }
           });
@@ -400,12 +413,19 @@ class cardState extends State<card> {
   }
 
   initiateLaunchUrl(String whatToLaunch) async {
-    String url = "http://docs.google.com/gview?embedded=true&url=";
-    await firebaseurl(whatToLaunch).then((onValue) {
-      url += Uri.encodeFull(onValue);
-      setState(() {
-        _launched = _launchInBrowser(url);
+    print(whatToLaunch);
+    if (whatToLaunch == "sampleresume.pdf") {
+      String url = "http://docs.google.com/gview?embedded=true&url=";
+      await firebaseurl(whatToLaunch).then((onValue) {
+        url += Uri.encodeFull(onValue);
+        setState(() {
+          _launched = _launchInBrowser(url);
+        });
       });
-    });
+    } else {
+      setState(() {
+        _launched = _launchInBrowser(whatToLaunch);
+      });
+    }
   }
 }
